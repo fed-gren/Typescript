@@ -1,3 +1,5 @@
+import "../css/tab.css";
+
 /**
  * tab 기능 구현
  *
@@ -8,14 +10,15 @@
 const classNames = {
   TAB_ROOT: "tab-root",
   TAB: "tab",
-  CONTENT: "content"
+  CONTENT: "content",
+  SELECTED: "selected"
 };
 
 const getSelector = (className: string) => `.${className}`;
 
 const createTab = (tabRootElement: HTMLElement) => {
   // element 캐싱 (tab, content)
-  const { TAB, CONTENT } = classNames;
+  const { TAB, CONTENT, SELECTED } = classNames;
   const tabElements = Array.from(tabRootElement.querySelectorAll(getSelector(TAB)));
   const contentElements = Array.from(tabRootElement.querySelectorAll(getSelector(CONTENT)));
 
@@ -33,6 +36,8 @@ const createTab = (tabRootElement: HTMLElement) => {
     if (!checkTargetIsTabElement(target, targetIndex)) return;
     evt.preventDefault();
 
+    tabElements.forEach(tabElement => tabElement.classList.remove(SELECTED));
+    target.classList.add(SELECTED);
     hideAllContents();
     showContent(contentElements[targetIndex]);
   }
