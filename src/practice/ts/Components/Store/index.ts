@@ -13,16 +13,22 @@
 
 class Store {
   private storeHistoryContainer: HTMLElement;
+  private form: HTMLFormElement;
   private input: HTMLInputElement;
-  private historyStorage: HTMLElement;
+  private historyStorage: HTMLUListElement;
 
   constructor() {
     this.storeHistoryContainer = document.querySelector(
       ".store-history"
     ) as HTMLElement;
-    this.input = document.querySelector(".history-input") as HTMLInputElement;
-    this.historyStorage = document.querySelector(
+    this.form = this.storeHistoryContainer.querySelector(
+      "form"
+    ) as HTMLFormElement;
+    this.input = this.storeHistoryContainer.querySelector(
+      ".history-input"
+    ) as HTMLInputElement;
+    this.historyStorage = this.storeHistoryContainer.querySelector(
       ".history-storage"
-    ) as HTMLDivElement;
+    ) as HTMLUListElement;
   }
 }

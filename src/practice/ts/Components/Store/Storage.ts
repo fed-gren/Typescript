@@ -23,7 +23,15 @@ class Stoarge {
     return this.storage[id];
   }
 
-  setHistoryItem(id: number, url: string, title: string) {
+  setHistoryItem({
+    id,
+    url,
+    title,
+  }: {
+    id: number;
+    url: string;
+    title: string;
+  }) {
     this.storage[id] = {
       url,
       title,
@@ -31,3 +39,5 @@ class Stoarge {
     };
   }
 }
+
+export default Stoarge;
