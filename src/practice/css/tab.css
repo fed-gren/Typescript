@@ -1,0 +1,17 @@
+.tab {
+  cursor: pointer;
+}
+
+.tab.selected {
+  color: blue;
+  font-weight: bold;
+}
+
+.content {
+  border-top: 1px solid black;
+  padding: 10px;
+}
+
+.content.hide {
+  display: none;
+}
