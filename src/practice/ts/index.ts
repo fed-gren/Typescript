@@ -1,3 +1,4 @@
+import SearchHistory from "./SearchHistory";
 import "../css/tab.css";
 
 /**
@@ -11,7 +12,8 @@ const classNames = {
   TAB_ROOT: "tab-root",
   TAB: "tab",
   CONTENT: "content",
-  SELECTED: "selected"
+  SELECTED: "selected",
+  SEARCH_HISTORY: "search-history"
 };
 
 const getSelector = (className: string) => `.${className}`;
@@ -47,5 +49,8 @@ const createTab = (tabRootElement: HTMLElement) => {
 }
 
 const rootElement = document.querySelector(getSelector(classNames.TAB_ROOT)) as HTMLElement;
+const searchHistoryElement = document.querySelector(getSelector(classNames.SEARCH_HISTORY)) as HTMLElement;
 
 createTab(rootElement);
+
+const searchHistory = new SearchHistory(searchHistoryElement);
