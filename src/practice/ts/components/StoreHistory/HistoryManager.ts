@@ -1,22 +1,29 @@
 import Storage from "./HistoryStore";
 
-class AddHistory {
+interface HistoryManagerProps {
+  formElem: HTMLFormElement;
+  inputElem: HTMLInputElement;
+  historyListElem: HTMLUListElement;
+  historyStore: Storage;
+}
+
+class HistoryManager {
   private formElem: HTMLFormElement;
   private inputElem: HTMLInputElement;
-  private storageContainer: HTMLUListElement;
-  private storage: Storage;
+  private historyListElem: HTMLUListElement;
+  private historyStore: Storage;
   private id: number;
 
-  constructor(
-    formElem: HTMLFormElement,
-    inputElem: HTMLInputElement,
-    storageContainer: HTMLUListElement,
-    storage: Storage
-  ) {
+  constructor({
+    formElem,
+    inputElem,
+    historyListElem,
+    historyStore,
+  }: HistoryManagerProps) {
     this.formElem = formElem;
     this.inputElem = inputElem;
-    this.storageContainer = storageContainer;
-    this.storage = storage;
+    this.historyListElem = historyListElem;
+    this.historyStore = historyStore;
     this.id = 0;
   }
 
@@ -27,7 +34,7 @@ class AddHistory {
       const userInput = this.inputElem.value;
       this.id += 1;
 
-      this.storage.setHistoryItem({
+      this.historyStore.setHistoryItem({
         id: this.id,
         url: userInput,
         title: this.id + userInput, // 타이틀 임시 방편
@@ -36,10 +43,12 @@ class AddHistory {
   }
 
   renderHistory() {
-    Object.values(this.storage).forEach(({ url, title }) => {
+    Object.values(this.historyStore).forEach(({ url, title }) => {
       const liElem = document.createElement("li");
       liElem.innerText = `${title}: ${url}`;
-      this.storageContainer.appendChild(liElem);
+      this.historyListElem.appendChild(liElem);
     });
   }
 }
+
+export default HistoryManager;
