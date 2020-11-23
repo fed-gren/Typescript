@@ -8,6 +8,12 @@ interface IHistories {
   [id: string]: IHistroy;
 }
 
+interface ISetHistoryArgs {
+  id: number;
+  url: string;
+  title: string;
+}
+
 class HistoryList {
   private storage: IHistories;
 
@@ -23,7 +29,7 @@ class HistoryList {
     return this.storage[id];
   }
 
-  setHistory({ id, url, title }: { id: number; url: string; title: string }) {
+  setHistory({ id, url, title }: ISetHistoryArgs) {
     this.storage[id] = {
       url,
       title,
