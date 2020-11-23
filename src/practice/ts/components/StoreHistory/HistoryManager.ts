@@ -27,14 +27,14 @@ class HistoryManager {
     this.id = 0;
   }
 
-  addUrlInHistory() {
+  attachEventToAddHistory() {
     this.formElem.addEventListener("submit", (event: Event) => {
       event.preventDefault();
 
       const userInput = this.inputElem.value;
       this.id += 1;
 
-      this.historyStore.setHistoryItem({
+      this.historyStore.setHistory({
         id: this.id,
         url: userInput,
         title: this.id + userInput, // 타이틀 임시 방편

@@ -23,15 +23,7 @@ class HistoryList {
     return this.storage[id];
   }
 
-  setHistoryItem({
-    id,
-    url,
-    title,
-  }: {
-    id: number;
-    url: string;
-    title: string;
-  }) {
+  setHistory({ id, url, title }: { id: number; url: string; title: string }) {
     this.storage[id] = {
       url,
       title,
