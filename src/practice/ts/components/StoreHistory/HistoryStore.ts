@@ -8,7 +8,7 @@ interface IHistoryItems {
   [id: string]: IHistroyItem;
 }
 
-class Stoarge {
+class HistoryList {
   private storage: IHistoryItems;
 
   constructor() {
@@ -40,4 +40,4 @@ class Stoarge {
   }
 }
 
-export default Stoarge;
+export default HistoryList;

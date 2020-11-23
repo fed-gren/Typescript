@@ -1,6 +1,6 @@
-import Storage from "./storage";
+import Storage from "./HistoryStore";
 
-class Add {
+class AddHistory {
   private formElem: HTMLFormElement;
   private inputElem: HTMLInputElement;
   private storageContainer: HTMLUListElement;
