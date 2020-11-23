@@ -1,25 +1,25 @@
-interface IHistroyItem {
+interface IHistroy {
   url: string;
   timestamp: Date;
   title: string;
 }
 
-interface IHistoryItems {
-  [id: string]: IHistroyItem;
+interface IHistories {
+  [id: string]: IHistroy;
 }
 
 class HistoryList {
-  private storage: IHistoryItems;
+  private storage: IHistories;
 
   constructor() {
     this.storage = {};
   }
 
-  get getHistory(): IHistoryItems {
+  get getHistory(): IHistories {
     return this.storage;
   }
 
-  getHistoryItem(id: string): IHistroyItem {
+  getHistoryItem(id: string): IHistroy {
     return this.storage[id];
   }
 
