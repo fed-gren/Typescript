@@ -1,6 +1,6 @@
 import Storage from "./HistoryStore";
 
-interface HistoryManagerProps {
+interface IHistoryManagerProps {
   formElem: HTMLFormElement;
   inputElem: HTMLInputElement;
   historyListElem: HTMLUListElement;
@@ -19,7 +19,7 @@ class HistoryManager {
     inputElem,
     historyListElem,
     historyStore,
-  }: HistoryManagerProps) {
+  }: IHistoryManagerProps) {
     this.formElem = formElem;
     this.inputElem = inputElem;
     this.historyListElem = historyListElem;
