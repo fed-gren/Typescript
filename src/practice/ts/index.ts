@@ -1,4 +1,5 @@
 import "../css/tab.css";
+import StoreHistory from "./components/StoreHistory";
 
 /**
  * tab 기능 구현
@@ -11,7 +12,8 @@ const classNames = {
   TAB_ROOT: "tab-root",
   TAB: "tab",
   CONTENT: "content",
-  SELECTED: "selected"
+  SELECTED: "selected",
+  STORE_HISTORY: "store-history",
 };
 
 const getSelector = (className: string) => `.${className}`;
@@ -19,14 +21,22 @@ const getSelector = (className: string) => `.${className}`;
 const createTab = (tabRootElement: HTMLElement) => {
   // element 캐싱 (tab, content)
   const { TAB, CONTENT, SELECTED } = classNames;
-  const tabElements = Array.from(tabRootElement.querySelectorAll(getSelector(TAB)));
-  const contentElements = Array.from(tabRootElement.querySelectorAll(getSelector(CONTENT)));
+  const tabElements = Array.from(
+    tabRootElement.querySelectorAll(getSelector(TAB))
+  );
+  const contentElements = Array.from(
+    tabRootElement.querySelectorAll(getSelector(CONTENT))
+  );
 
-  const checkTargetIsTabElement = (target: HTMLElement, index: number) => target !== null && index >= 0;
+  const checkTargetIsTabElement = (target: HTMLElement, index: number) =>
+    target !== null && index >= 0;
   const hideAllContents = () => {
-    contentElements.forEach(contentElement => contentElement.classList.add("hide"));
-  }
-  const showContent = (contentElement: Element) => contentElement.classList.remove("hide");
+    contentElements.forEach(contentElement =>
+      contentElement.classList.add("hide")
+    );
+  };
+  const showContent = (contentElement: Element) =>
+    contentElement.classList.remove("hide");
 
   // content 노출 핸들러
   const showMatchedContent = (evt: Event) => {
@@ -40,12 +50,19 @@ const createTab = (tabRootElement: HTMLElement) => {
     target.classList.add(SELECTED);
     hideAllContents();
     showContent(contentElements[targetIndex]);
-  }
+  };
 
   // tab 버튼 클릭 이벤트
   tabRootElement.addEventListener("click", showMatchedContent);
-}
+};
 
-const rootElement = document.querySelector(getSelector(classNames.TAB_ROOT)) as HTMLElement;
+const rootElement = document.querySelector(
+  getSelector(classNames.TAB_ROOT)
+) as HTMLElement;
+const SearchHistoryElement = document.querySelector(
+  getSelector(classNames.STORE_HISTORY)
+) as HTMLElement;
 
 createTab(rootElement);
+
+const storeHistory = new StoreHistory(SearchHistoryElement);

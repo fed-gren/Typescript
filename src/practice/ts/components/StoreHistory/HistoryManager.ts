@@ -39,11 +39,13 @@ class HistoryManager {
         url: userInput,
         title: this.id + userInput, // 타이틀 임시 방편
       });
+
+      this.renderHistory();
     });
   }
 
   renderHistory() {
-    Object.values(this.historyStore).forEach(({ url, title }) => {
+    Object.values(this.historyStore.getHistory).forEach(({ url, title }) => {
       const liElem = document.createElement("li");
       liElem.innerText = `${title}: ${url}`;
       this.historyListElem.appendChild(liElem);

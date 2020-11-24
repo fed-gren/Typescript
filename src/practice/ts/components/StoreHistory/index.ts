@@ -14,7 +14,7 @@
 import HistoryManager from "./HistoryManager";
 import HistoryStore from "./HistoryStore";
 
-class StoreHisotry {
+class StoreHistory {
   private storeHistoryRootElem: HTMLElement;
   private formElem: HTMLFormElement;
   private inputElem: HTMLInputElement;
@@ -22,10 +22,8 @@ class StoreHisotry {
   private historyStore: HistoryStore;
   private historyManager: HistoryManager;
 
-  constructor() {
-    this.storeHistoryRootElem = document.querySelector(
-      ".store-history"
-    ) as HTMLElement;
+  constructor(rootStoreHistoryElem: HTMLElement) {
+    this.storeHistoryRootElem = rootStoreHistoryElem;
     this.formElem = this.storeHistoryRootElem.querySelector(
       "form"
     ) as HTMLFormElement;
@@ -42,7 +40,13 @@ class StoreHisotry {
       historyListElem: this.historyListElem,
       historyStore: this.historyStore,
     });
+
+    this.init();
   }
 
-  init() {}
+  init() {
+    this.historyManager.attachEventToAddHistory();
+  }
 }
+
+export default StoreHistory;
