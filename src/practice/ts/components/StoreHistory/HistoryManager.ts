@@ -41,6 +41,7 @@ class HistoryManager {
       });
 
       this.renderHistory();
+      this.inputElem.value = "";
     });
   }
 
