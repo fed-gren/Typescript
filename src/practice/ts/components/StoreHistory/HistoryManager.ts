@@ -45,6 +45,7 @@ class HistoryManager {
   }
 
   renderHistory() {
+    this.historyListElem.innerHTML = "";
     Object.values(this.historyStore.getHistory).forEach(({ url, title }) => {
       const liElem = document.createElement("li");
       liElem.innerText = `${title}: ${url}`;
