@@ -11,11 +11,16 @@
  * 3. ui 담당하는 class
  */
 
-class Store {
+import HistoryManager from "./HistoryManager";
+import HistoryStore from "./HistoryStore";
+
+class StoreHisotry {
   private storeHistoryRootElem: HTMLElement;
   private formElem: HTMLFormElement;
   private inputElem: HTMLInputElement;
   private historyListElem: HTMLUListElement;
+  private historyStore: HistoryStore;
+  private historyManager: HistoryManager;
 
   constructor() {
     this.storeHistoryRootElem = document.querySelector(
@@ -30,5 +35,14 @@ class Store {
     this.historyListElem = this.storeHistoryRootElem.querySelector(
       ".history-storage"
     ) as HTMLUListElement;
+    this.historyStore = new HistoryStore();
+    this.historyManager = new HistoryManager({
+      formElem: this.formElem,
+      inputElem: this.inputElem,
+      historyListElem: this.historyListElem,
+      historyStore: this.historyStore,
+    });
   }
+
+  init() {}
 }
