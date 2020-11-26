@@ -36,6 +36,17 @@ export default class SearchHistory {
     this.setList();
   }
 
+  async fetchHistoryItems() {
+    /**
+     * TODO: 지금은 mock api에서 가져오지만 추후엔 local storage에서 가져와야 함
+     */
+    await fetch("http://localhost:8080/history")
+      .then(response => response.json())
+      .then(historyJson => {
+        this.historyJson = historyJson;
+      });
+  }
+
   attachEvent() {
     this.inputElement.addEventListener("keyup", (event) => {
       // value를 기반으로 매칭 되는 애들만 따로 찾기
@@ -67,16 +78,5 @@ export default class SearchHistory {
       itemElement.textContent = history.title;
       this.listElement.appendChild(itemElement);
     });
-  }
-
-  async fetchHistoryItems() {
-    /**
-     * TODO: 지금은 mock api에서 가져오지만 추후엔 local storage에서 가져와야 함
-     */
-    await fetch("http://localhost:8080/history")
-      .then(response => response.json())
-      .then(historyJson => {
-        this.historyJson = historyJson;
-      });
   }
 }
