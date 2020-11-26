@@ -33,7 +33,8 @@ export default class SearchHistory {
   async init() {
     await this.fetchHistoryItems();
     this.attachEvent();
-    this.setList();
+    this.setHistoryArray();
+    this.render(this.historyArray);
   }
 
   async fetchHistoryItems() {
@@ -65,13 +66,15 @@ export default class SearchHistory {
       .filter(history => history);
   }
 
-  setList() {
-    /**
-     * history list 밑에 li 템플릿으로 추가
-     */
+  setHistoryArray() {
     this.historyArray = [...Object.values(this.historyJson)];
+  }
 
-    this.historyArray.forEach(history => {
+  render(historyArray: history[]) {
+    // 현재 보여줘야 할 애들을 보여줌.
+    // setList에서 historyArray를 기반으로 하듯이.
+    // history 배열을 받아서 만들어 보여주기.
+    historyArray.forEach(history => {
       const itemElement = document.createElement("li");
 
       itemElement.classList.add(classNames.HISTORY_ITEM);
