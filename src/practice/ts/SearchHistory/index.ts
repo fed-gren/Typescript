@@ -1,7 +1,5 @@
 import { classNames } from "./constants";
 
-
-
 interface history {
   url: string;
   timestamp: string;
@@ -19,6 +17,7 @@ export default class SearchHistory {
   private listElement: HTMLUListElement;
   private listItemElement: HTMLLIElement;
   private historyJson: histories;
+  private historyArray: history[];
 
   constructor(baseElement: HTMLElement) {
     this.baseElement = baseElement;
@@ -26,20 +25,42 @@ export default class SearchHistory {
     this.inputElement = this.baseElement.querySelector(`.${classNames.SEARCH_INPUT}`) as HTMLInputElement;
     this.listItemElement = this.baseElement.querySelector(`.${classNames.HISTORY_ITEM}`) as HTMLLIElement;
     this.historyJson = {};
+    this.historyArray = [];
 
     this.init();
   }
 
   async init() {
     await this.fetchHistoryItems();
+    this.attachEvent();
     this.setList();
+  }
+
+  attachEvent() {
+    this.inputElement.addEventListener("keyup", (event) => {
+      // value를 기반으로 매칭 되는 애들만 따로 찾기
+      // 매칭되는 애들만 render
+      // input value가 없으면 전체 노출
+      const matchedHistories = this.getSearchKeywordMatchedHistories(this.inputElement.value);
+    });
+  }
+
+  getSearchKeywordMatchedHistories(keyword: string) {
+    const regexOption = "gi";
+    const regex = new RegExp(`${keyword}`, regexOption);
+
+    return this.historyArray
+      .map(({ title }) => regex.exec(title))
+      .filter(history => history);
   }
 
   setList() {
     /**
      * history list 밑에 li 템플릿으로 추가
      */
-    [...Object.values(this.historyJson)].forEach(history => {
+    this.historyArray = [...Object.values(this.historyJson)];
+
+    this.historyArray.forEach(history => {
       const itemElement = document.createElement("li");
 
       itemElement.classList.add(classNames.HISTORY_ITEM);
