@@ -17,7 +17,8 @@ import HistoryStore from "./HistoryStore";
 class StoreHistory {
   private storeHistoryRootElem: HTMLElement;
   private formElem: HTMLFormElement;
-  private inputElem: HTMLInputElement;
+  private urlInputElem: HTMLInputElement;
+  private titleInputElem: HTMLInputElement;
   private historyListElem: HTMLUListElement;
   private historyStore: HistoryStore;
   private historyManager: HistoryManager;
@@ -27,8 +28,11 @@ class StoreHistory {
     this.formElem = this.storeHistoryRootElem.querySelector(
       "form"
     ) as HTMLFormElement;
-    this.inputElem = this.storeHistoryRootElem.querySelector(
-      ".history-input"
+    this.urlInputElem = this.storeHistoryRootElem.querySelector(
+      ".history-input-url"
+    ) as HTMLInputElement;
+    this.titleInputElem = this.storeHistoryRootElem.querySelector(
+      ".history-input-title"
     ) as HTMLInputElement;
     this.historyListElem = this.storeHistoryRootElem.querySelector(
       ".history-storage"
@@ -36,7 +40,8 @@ class StoreHistory {
     this.historyStore = new HistoryStore();
     this.historyManager = new HistoryManager({
       formElem: this.formElem,
-      inputElem: this.inputElem,
+      urlInputElem: this.urlInputElem,
+      titleInputElem: this.titleInputElem,
       historyListElem: this.historyListElem,
       historyStore: this.historyStore,
     });

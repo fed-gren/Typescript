@@ -65,4 +65,4 @@ const SearchHistoryElement = document.querySelector(
 
 createTab(rootElement);
 
-const storeHistory = new StoreHistory(SearchHistoryElement);
+new StoreHistory(SearchHistoryElement);

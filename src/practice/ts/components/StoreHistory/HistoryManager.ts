@@ -2,26 +2,30 @@ import Storage from "./HistoryStore";
 
 interface IHistoryManagerProps {
   formElem: HTMLFormElement;
-  inputElem: HTMLInputElement;
+  urlInputElem: HTMLInputElement;
+  titleInputElem: HTMLInputElement;
   historyListElem: HTMLUListElement;
   historyStore: Storage;
 }
 
 class HistoryManager {
   private formElem: HTMLFormElement;
-  private inputElem: HTMLInputElement;
+  private urlInputElem: HTMLInputElement;
+  private titleInputElem: HTMLInputElement;
   private historyListElem: HTMLUListElement;
   private historyStore: Storage;
   private id: number;
 
   constructor({
     formElem,
-    inputElem,
+    urlInputElem,
+    titleInputElem,
     historyListElem,
     historyStore,
   }: IHistoryManagerProps) {
     this.formElem = formElem;
-    this.inputElem = inputElem;
+    this.urlInputElem = urlInputElem;
+    this.titleInputElem = titleInputElem;
     this.historyListElem = historyListElem;
     this.historyStore = historyStore;
     this.id = 0;
@@ -31,17 +35,21 @@ class HistoryManager {
     this.formElem.addEventListener("submit", (event: Event) => {
       event.preventDefault();
 
-      const userInput = this.inputElem.value;
+      const url = this.urlInputElem.value;
+      const title = this.titleInputElem.value;
+      console.log(url);
+      console.log(title);
       this.id += 1;
 
       this.historyStore.setHistory({
         id: this.id,
-        url: userInput,
-        title: this.id + userInput, // 타이틀 임시 방편
+        url,
+        title,
       });
 
       this.renderHistory();
-      this.inputElem.value = "";
+      this.urlInputElem.value = "";
+      this.urlInputElem.value = "";
     });
   }
 
