@@ -37,8 +37,7 @@ class HistoryManager {
 
       const url = this.urlInputElem.value;
       const title = this.titleInputElem.value;
-      console.log(url);
-      console.log(title);
+
       this.id += 1;
 
       this.historyStore.setHistory({
@@ -46,10 +45,10 @@ class HistoryManager {
         url,
         title,
       });
-
       this.renderHistory();
+
       this.urlInputElem.value = "";
-      this.urlInputElem.value = "";
+      this.titleInputElem.value = "";
     });
   }
 
