@@ -58,7 +58,8 @@ export default class SearchHistory {
       } else {
         const matchedHistories = this.getSearchKeywordMatchedHistories(this.inputElement.value);
 
-        this.showMatchedHistories(matchedHistories);
+        if (matchedHistories.length === 0) this.showAllHistories();
+        else this.showMatchedHistories(matchedHistories);
       }
     });
   }
@@ -87,14 +88,14 @@ export default class SearchHistory {
   }
 
   showAllHistories() {
-    this.render(this.historyArray);
+    this.renderHistory(this.historyArray);
   }
 
   showMatchedHistories(matchedHistories: history[]) {
-    this.render(matchedHistories);
+    this.renderHistory(matchedHistories);
   }
 
-  render(historyArray: history[]) {
+  renderHistory(historyArray: history[]) {
     // 현재 보여줘야 할 애들을 보여줌.
     // setList에서 historyArray를 기반으로 하듯이.
     // history 배열을 받아서 만들어 보여주기.
