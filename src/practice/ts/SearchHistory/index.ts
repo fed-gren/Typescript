@@ -31,6 +31,7 @@ export default class SearchHistory {
   }
 
   async init() {
+    this.showLoading();
     await this.fetchHistoryItems();
     this.attachEvent();
     this.setHistoryArray();
@@ -58,7 +59,7 @@ export default class SearchHistory {
       } else {
         const matchedHistories = this.getSearchKeywordMatchedHistories(this.inputElement.value);
 
-        if (matchedHistories.length === 0) this.showAllHistories();
+        if (matchedHistories.length === 0) this.showNoMatchedHistory();
         else this.showMatchedHistories(matchedHistories);
       }
     });
@@ -108,5 +109,13 @@ export default class SearchHistory {
       itemElement.textContent = history.title;
       this.listElement.appendChild(itemElement);
     });
+  }
+
+  showLoading() {
+    this.listElement.innerHTML = `<div class="loading">데이터 불러오는 중...</div>`;
+  }
+
+  showNoMatchedHistory() {
+    this.listElement.innerHTML = `<div class="no-match">검색 결과가 없습니다.</div>`;
   }
 }
