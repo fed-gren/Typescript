@@ -97,9 +97,6 @@ export default class SearchHistory {
   }
 
   renderHistory(historyArray: history[]) {
-    // 현재 보여줘야 할 애들을 보여줌.
-    // setList에서 historyArray를 기반으로 하듯이.
-    // history 배열을 받아서 만들어 보여주기.
     this.listElement.innerHTML = "";
 
     historyArray.forEach(history => {
