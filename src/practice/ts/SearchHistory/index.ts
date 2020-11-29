@@ -34,7 +34,7 @@ export default class SearchHistory {
     await this.fetchHistoryItems();
     this.attachEvent();
     this.setHistoryArray();
-    this.render(this.historyArray);
+    this.showAllHistories();
   }
 
   async fetchHistoryItems() {
@@ -68,6 +68,10 @@ export default class SearchHistory {
 
   setHistoryArray() {
     this.historyArray = [...Object.values(this.historyJson)];
+  }
+
+  showAllHistories() {
+    this.render(this.historyArray);
   }
 
   render(historyArray: history[]) {
