@@ -66,7 +66,7 @@ export default class SearchHistory {
   }
 
   getSearchKeywordMatchedHistories(keyword: string) {
-    const regexOption = "gi";
+    const regexOption = "i";
     const regex = new RegExp(`${keyword}`, regexOption);
 
     /**
