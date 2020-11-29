@@ -4,12 +4,12 @@ interface history {
   url: string;
   timestamp: string;
   title: string;
+  match?: RegExpExecArray;
 }
 
 interface histories {
   [key: string]: history;
 }
-
 
 export default class SearchHistory {
   private baseElement: HTMLElement;
@@ -53,7 +53,13 @@ export default class SearchHistory {
       // value를 기반으로 매칭 되는 애들만 따로 찾기
       // 매칭되는 애들만 render
       // input value가 없으면 전체 노출
-      const matchedHistories = this.getSearchKeywordMatchedHistories(this.inputElement.value);
+      if (this.inputElement.value === "") {
+        this.showAllHistories();
+      } else {
+        const matchedHistories = this.getSearchKeywordMatchedHistories(this.inputElement.value);
+
+        this.showMatchedHistories(matchedHistories);
+      }
     });
   }
 
@@ -61,9 +67,19 @@ export default class SearchHistory {
     const regexOption = "gi";
     const regex = new RegExp(`${keyword}`, regexOption);
 
+    /**
+     * TODO:
+     * regex.exec를 두번 실행하는 로직 수정해야함.
+     * 현재는 map 콜백 안에서 검사하면 return array의 타입이 null[]이 될 수 있어 오류 발생함.
+     */
     return this.historyArray
-      .map(({ title }) => regex.exec(title))
-      .filter(history => history);
+      .filter(({ title }) => regex.exec(title))
+      .map(history => {
+        const execArray = regex.exec(history.title) as RegExpExecArray;
+
+        history.match = execArray;
+        return history;
+      });
   }
 
   setHistoryArray() {
@@ -72,6 +88,10 @@ export default class SearchHistory {
 
   showAllHistories() {
     this.render(this.historyArray);
+  }
+
+  showMatchedHistories(matchedHistories: history[]) {
+    this.render(matchedHistories);
   }
 
   render(historyArray: history[]) {
