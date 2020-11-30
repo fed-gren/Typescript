@@ -14,7 +14,7 @@ interface ISetHistoryArgs {
   title: string;
 }
 
-class HistoryList {
+class HistoryStore {
   private storage: IHistories;
 
   constructor() {
@@ -38,4 +38,4 @@ class HistoryList {
   }
 }
 
-export default HistoryList;
+export default HistoryStore;
