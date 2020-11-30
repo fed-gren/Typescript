@@ -32,12 +32,6 @@ class StoreHistory {
       historyListElem: this.historyListElem,
       historyStore: this.historyStore,
     });
-
-    this.init();
-  }
-
-  init() {
-    this.historyManager.attachEventToAddHistory();
   }
 }
 

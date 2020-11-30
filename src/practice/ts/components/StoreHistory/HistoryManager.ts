@@ -29,6 +29,8 @@ class HistoryManager {
     this.historyListElem = historyListElem;
     this.historyStore = historyStore;
     this.id = 0;
+
+    this.attachEventToAddHistory();
   }
 
   attachEventToAddHistory() {
