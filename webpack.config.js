@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const history = require('./mock/history.json');
 
 module.exports = {
   entry: './src/practice/ts/index.ts',
@@ -16,6 +17,13 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
     ],
+  },
+  devServer: {
+    before: function (app, server, compiler) {
+      app.get('/history', function (req, res) {
+        res.json(history);
+      });
+    }
   },
   plugins: [new HtmlWebpackPlugin({
     template: "./src/practice/html/index.html"
