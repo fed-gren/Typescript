@@ -51,9 +51,6 @@ export default class SearchHistory {
 
   attachEvent() {
     this.inputElement.addEventListener("keyup", (event) => {
-      // value를 기반으로 매칭 되는 애들만 따로 찾기
-      // 매칭되는 애들만 render
-      // input value가 없으면 전체 노출
       if (this.inputElement.value === "") {
         this.showAllHistories();
       } else {
